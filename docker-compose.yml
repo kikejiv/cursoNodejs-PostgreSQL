@@ -1,0 +1,13 @@
+
+#configuracion de posgres en docker
+version: '3.3' #version del yml
+
+services:  # definimos los servicios que queremos que corra en este caso postgres
+  postgres: #nombre del servicio
+    image: postgres:13 #imagen que va a correr en el contenedor
+    environment: # variablea de ambiente es la configuracion que el contenedor va a reibir
+      - POSTGRES_DB=my_store
+      - POSTGRES_USER=kike
+      - POSTGRES_PASSWORD=admin123
+    ports: # puerto en el cual va a correr
+      - 5432:5432
