@@ -1,4 +1,4 @@
-// aqui crearemos la configuracionpara tener as variables de entorno (conexion a la db)
+// aqui crearemos la configuracionpara tener las variables de entorno (conexion a la db)
 require('dotenv').config();
 
 const config = {

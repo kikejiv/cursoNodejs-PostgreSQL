@@ -2,7 +2,7 @@ const { faker } = require('@faker-js/faker');
 const boom = require('@hapi/boom');
 
 //const pool = require('../libs/postgres.pool'); //realiza las conexions con la bd
-const sequelize = require('../libs/sequelize');
+const { sequelize, models} = require('../libs/sequelize');
 
 class ProductsService {
 
@@ -36,10 +36,12 @@ class ProductsService {
   }
 
   async find() {
-    const query = 'SELECT * FROM tasks';
+    //const query = 'SELECT * FROM tasks';
     //const rta = await this.pool.query(query);
-    const [data] = await sequelize.query(query);
-    return data;
+    //const [data] = await sequelize.query(query);
+    const rta = await models.Product.findAll();
+    //return data;
+    return rta;
   }
 
   async findOne(id) {

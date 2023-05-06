@@ -1,4 +1,4 @@
-// las librerias que se encarga de gestionar las conexiones de los servicios a terceros sean api o db
+// pool es la librerias que se encarga de gestionar las conexiones de los servicios a terceros sean api o db
 
 const { Pool } = require('pg');
 
