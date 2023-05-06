@@ -12,7 +12,8 @@ class UserService {
   }
 
   async create(data) {
-    return data;
+    const newUser = await models.User.create(data);
+    return newUser;
   }
 
   async find() {
@@ -23,18 +24,23 @@ class UserService {
    return rta;
   }
 
-  async findOne(id) {
-    return { id };
+  async findOne(id) { //esta funcion busca el id, valida y lanza el error por si el id no existe
+    const user = await models.User.findByPk(id);
+    if (!user) {
+      throw boom.notFound('User Not Found');
+    }
+    return user;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
-    };
+    const user = await this.findOne(id); //esta es la funcion para la vaidacion del error
+    const rta = await user.update(changes);
+    return rta;
   }
 
   async delete(id) {
+    const user = await this.findOne(id);
+    await user.destroy();
     return { id };
   }
 }
