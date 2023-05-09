@@ -7,11 +7,11 @@ const setupModels = require('./../db/models');
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
-const URI = `mysql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`; //se concatenn las variables de conexion
+const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`; //se concatenn las variables de conexion
 
 
 const sequelize = new Sequelize(URI, {
-  dialect: 'mysql', //se define a la bd que se va a conectar mysqul o postgres
+  dialect: 'postgres', //se define a la bd que se va a conectar mysqul o postgres
   logging: console.log,
 });
 

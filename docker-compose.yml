@@ -1,30 +1,29 @@
 #configuracion de postgres en docker o se declara el servicio     con el comando docker-compose up -d se levanta el servicio
 version: '3.3' #version del yml
 
-services:
-  # definimos los servicios que queremos que corra en este caso postgres
-  postgres:
-    #nombre del servicio
+services: # definimos los servicios que queremos que corra en este caso postgres
+  postgres: #nombre del servicio
     image: postgres:13 #imagen que va a correr en el contenedor
-    environment:
-      # variablea de ambiente es la configuracion que el contenedor va a reibir
+    environment:  # variablea de ambiente es la configuracion que el contenedor va a recibir
       - POSTGRES_DB=my_store
       - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin123
-    ports:
-      # puerto en el cual va a correr
+      - POSTGRES_PASSWORD=root
+    ports:   # puerto en el cual va a correr
       - "5432:5432"
     volumes:
       - "~/postgres_data:/var/lib/postgresql/data" #con esto hacemos que los datos tengan persistencia (queden guardados)
 
   pgadmin:
-   image: gpage/pgadmin4
-   environment:
-    - PGADMIN_DEFAUL_EMAIL=admin@mail.com
-    - PGADMIN_DEFAUL_PASSWORD=root
-   ports:
-    - 5050:80
-## confiuracion para el servicio para de mysql en docker
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 5050:80
+
+
+
+ ## confiuracion para el servicio para de mysql en docker
   mysql:
    image: mysql:5
    environment: # variablea de ambiente es la configuracion que el contenedor va a reibir
@@ -33,16 +32,16 @@ services:
        - MYSQL_ROOT_PASSWORD=toor
        - MYSQL_PORT=3306
    ports:
-    - "3307:3306"
+       - "3306:3306"
    volumes:
-    - "~/mysql_data:/var/lib/mysql"
+       - "~/mysql_data:/var/lib/mysql"
 
   phpmyadmin:
    image: phpmyadmin/phpmyadmin
    environment: # variablea de ambiente es la configuracion que el contenedor va a reibir
-    - MYSQL_ROOT_PASSWORD=toor
-    - PMA_HOST=mysql
+     - MYSQL_ROOT_PASSWORD=toor
+     - PMA_HOST=mysql
    ports:
-    - 8080:80
+     - 8080:80
 
 
