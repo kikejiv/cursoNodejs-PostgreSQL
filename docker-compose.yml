@@ -7,7 +7,7 @@ services: # definimos los servicios que queremos que corra en este caso postgres
     environment:  # variablea de ambiente es la configuracion que el contenedor va a recibir
       - POSTGRES_DB=my_store
       - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_PASSWORD=admin123
     ports:   # puerto en el cual va a correr
       - "5432:5432"
     volumes:
