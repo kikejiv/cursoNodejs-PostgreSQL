@@ -1,6 +1,6 @@
 'use strict';
 
-const { UserSchema, USER_TABLE } = require('./../models/user.models');
+const { UserSchema, USER_TABLE } = require('./user.models');
 
 
 /** @type {import('sequelize-cli').Migration} */
