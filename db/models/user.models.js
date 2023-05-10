@@ -18,10 +18,21 @@ const UserSchema = {   //este seria el esquema que define la estructura de la db
     allowNull: false,
     type: DataTypes.STRING
   },
+ role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    defaultValue: 'customer'
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',
+    defaultValue: Sequelize.NOW
+  },
+  updatedAt: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'update_at',
     defaultValue: Sequelize.NOW
   }
 }
