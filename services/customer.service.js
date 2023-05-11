@@ -10,15 +10,19 @@ class CustomerService {
   /*  this.pool = pool;
     this.pool.on('error', (err) => console.error(err));*/
   }
-
-  async create(data) {
-    const newCustomer = await models.Customer.create(data);
+//de esta manera estariamos creando el usuario y el cliente en el mismo endpoint
+  async create(data) {//aqui resuelve creaando primero el usuario
+    const newCustomer = await models.Customer.create( data, {
+      include: ['user']
+    });
     return newCustomer;
   }
 
   async find() {
    // const client = await getConnection();
-    const rta = await models.Customer.findAll();
+    const rta = await models.Customer.findAll({
+      include: ['user'] //desde aqui le digo que me traiga la informacion del cliente anidada al usuario
+    });
    // const rta = await client.query('SELECT * FROM tasks')
    // return rta.rows;
    return rta;

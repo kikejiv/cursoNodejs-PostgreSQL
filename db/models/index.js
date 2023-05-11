@@ -10,7 +10,8 @@ function setupModels(sequelize) {
   Product.init( ProductSchema, Product.config(sequelize));
   Category.init( CategorySchema, Category.config(sequelize));
 
-  Customer.associate(sequelize.models); //desde que aqui se realiza la relacion
+  User.associate(sequelize.models); //desde que aqui se realiza la relacion o asociacion al modelo user-customer
+  Customer.associate(sequelize.models); //desde que aqui se realiza la relacion o asociacion al modelo customer-user
 }
 
 module.exports = setupModels;
