@@ -1,6 +1,9 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const PRODUCT_TABLE = 'products'; //define el nombre de nuestra tabla a crear
+const {CATEGORY_TABLE} = require('./category.models'); //define el nombre de nuestra tabla a crear
+
+const PRODUCT_TABLE = 'products';
+
 
 const ProductSchema = {
   id: {
@@ -13,6 +16,10 @@ const ProductSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  description: {
+    allowNull: false,
+    type: DataTypes.TEXT,
+  },
   price: {
     allowNull: false,
     type: DataTypes.INTEGER
@@ -22,12 +29,31 @@ const ProductSchema = {
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: Sequelize.NOW
+  },
+  updatedAt: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'update_at',
+    defaultValue: Sequelize.NOW
+  },
+  categoryId: {
+    fields: 'category_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    reference: {
+      model: CATEGORY_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
   }
+
 }
 
 class Product extends Model {
-  static associate() {
 
+  static associate(models) {
+    this.belongsTo(models.Category, {as: 'category'});
   }
 
   static config(sequelize) {
