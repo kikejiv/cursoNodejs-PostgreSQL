@@ -19,6 +19,10 @@ class OrderService {
   }
 
   async findOne(id) {
+
+    if (!category) {
+      throw boom.notFound('category Not Found');
+    }
     return { id };
   }
 
