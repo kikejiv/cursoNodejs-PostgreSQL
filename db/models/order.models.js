@@ -22,10 +22,10 @@ const OrderSchema = {
     onDelete: 'SET NULL'
   },
   total:{
-    type: DataTypes.VIRTUAL,
-    get() {
+    type: DataTypes.VIRTUAL, //se pone como cmpo virtual para que le atributo no viva en la tabla de la bd
+    get() { //con el get se especifica como se va a calcular el campo
       if (this.item.length > 0) {
-        return this.item.reduce((total, item) => {
+        return this.item.reduce((total, item) => { //se utiliza la funcion reduce la cual  todo a un solo valor el cual seria total
           return total + (item.price * item.OrderProduct.amount);
         }, 0);
       }
