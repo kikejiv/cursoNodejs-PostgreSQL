@@ -21,6 +21,17 @@ const OrderSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
+  total:{
+    type: DataTypes.VIRTUAL,
+    get() {
+      if (this.item.length > 0) {
+        return this.item.reduce((total, item) => {
+          return total + (item.price * item.OrderProduct.amount);
+        }, 0);
+      }
+      return 0;
+    }
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -43,7 +54,7 @@ class Order extends Model {
       as: 'customer',
     });
     this.belongsToMany(models.Product, { //de esta manera resolvemos la asociacion de muchos a muchos entre order y product
-      as: 'items',
+      as: 'item',
       through: models.OrderProduct,
       foreignKey: 'orderId',
       otherKey: 'productId'

@@ -3,7 +3,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { ORDER_TABLE } = require('./order.models');
 const { PRODUCT_TABLE } = require('./product.models');
 
-const ORDER_PRODUCT_TABLE = 'orders_products';
+const ORDER_PRODUCT_TABLE = 'order_product';
 
 const OrderProductSchema = {
   id: {
@@ -55,11 +55,9 @@ const OrderProductSchema = {
 
 class OrderProduct extends Model {
 
-  static associate(models) { //de4sde esta linea se realiza la asociasin de las tablas
-    this.belongsTo(models.Customer, {
-      as: 'customer',
-    }); //con esta linea declaro que la tabla customer esta asociada con la user
-  }
+  static associate(models) {
+
+    };
 
   static config(sequelize) {
     return {

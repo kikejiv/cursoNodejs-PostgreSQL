@@ -8,7 +8,7 @@ module.exports = {
    await queryInterface.createTable(ORDER_PRODUCT_TABLE, OrderProductSchema);
   },
 
-  async down (queryInterface, Sequelize) {
+  async down (queryInterface) {
     await queryInterface.dropTable(ORDER_PRODUCT_TABLE);
   }
 };
