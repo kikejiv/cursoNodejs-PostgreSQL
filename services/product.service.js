@@ -1,4 +1,5 @@
 const { faker } = require('@faker-js/faker');
+const { Op } = require('sequelize');
 const boom = require('@hapi/boom');
 
 //const pool = require('../libs/postgres.pool'); //realiza las conexions con la bd
@@ -34,12 +35,27 @@ class ProductsService {
   async find(query) {
     const options = {
       include:['category'],
+      where: {}
     }
     const { limit, offset } = query; //con estas lineas incluimos la paginacion limit y offset de manera dinmica
     if (limit && offset) {
       options.limit = limit;
       options.offset = offset;
     }
+
+    const { price } = query; //realizar filtro por el precio del producto
+    if (price) {
+      options.where.price = price;
+    }
+
+    const { price_min, price_max } = query; //realizar filtro por el precio entre el minimo y el maximo
+    if (price_min && price_max) {
+      options.where.price = {
+        [Op.gte]: price_min,
+        [Op.lte]: price_max
+      };
+    }
+
     const products = await models.Product.findAll(options);
     return products;
   }
